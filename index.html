@@ -1,2 +1,184 @@
-on the way...
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="description" content="A short introduction to Appium (Android) at #11 Meetup ŁuczniczQA">
+		<meta name="author" content="Aleksander Czapski">
 
+		<title>#11 Meetup ŁuczniczQA</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/agate.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>Introduction to</h3>
+					<h1>Appium</h1>
+					<img src="img/appium.svg" style="background:none; border:none; box-shadow:none; width:15%;" />
+					<h4>(on Android platform)</h4>
+					<p>
+						<small>Aleksander Czapski</small>
+					</p>
+				</section>
+				<section>
+					<h2>About me &#x1F466;</h2>
+					<p class="fragment fade-right">Mechanical Engineer by day, IT enthusiast at night</p>
+					<p class="fragment fade-right">UTP, WSB</p>
+					<p class="fragment fade-right">&#x1F468;&#x200D;&#x1F469;&#x200D;&#x1F467;&#x200D;&#x1F467; &#x1F408;</p>
+ 
+				</section>
+				<section>
+					<h2>What is Appium&#x2754; &#x1F916;</h2>
+					<blockquote cite="http://appium.io/docs/en/about-appium/intro/">
+						&ldquo;Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS mobile, Android mobile, and Windows desktop platforms.&rdquo;
+					</blockquote>
+				</section>
+				<section>
+					<h2>Appium Philosophy &#x1F4DC;</h2>
+					<ol>
+						<li class="fragment fade-right">You shouldn't have to recompile your app or modify it in any way in order to automate it.</li>
+						<li class="fragment fade-right">You shouldn't be locked into a specific language or framework to write and run your tests.</li>
+						<li class="fragment fade-right">A mobile automation framework shouldn't reinvent the wheel when it comes to automation APIs.</li>
+						<li class="fragment fade-right">A mobile automation framework should be open source, in spirit and practice as well as in name!</li>
+					</ol>
+				</section>
+				<section>
+					<h2>Appium Design &#x1F3A8;</h2>
+					<ol>
+							<li class="fragment fade-right">Using vendor-provided automation frameworks (Android 4.2+: <a href="https://developer.android.com/training/testing/ui-automator.html">UiAutomator/UiAutomator2</a>) - you're testing the same app you're shipping.</li>
+							<li class="fragment fade-right">Wrapping the vendor-provided frameworks in one API (<a href="https://w3c.github.io/webdriver/">WebDriver</a> API), and there are already clients written in every popular programming language.</li>
+							<li class="fragment fade-right">WebDriver (de facto standard for automating web browsers) + extra API methods useful for mobile automation.</li>
+							<li class="fragment fade-right">Appium is open source. &#x1F600;</li>
+					</ol>
+				</section>
+				<section>
+					<h2>Appium Concepts &#x1F914;</h2>
+					<ul>
+						<li class="fragment fade-right">Client/Server Architecture</li>
+						<li class="fragment fade-right">Session</li>
+						<li class="fragment fade-right">Desired Capabilities</li>
+						<li class="fragment fade-right">Appium Server</li>
+						<li class="fragment fade-right">Appium Clients</li>
+						<li class="fragment fade-right">Appium Desktop</li>
+					</ul>
+				</section>
+				<section>
+					<h2>What about mobile games&#x2754; &#x1F928;</h2>
+					<ul>
+						<li class="fragment fade-right">OpenCV (opencv4nodejs)</li>
+						<li class="fragment fade-right">Parsing logs</li>
+						<li class="fragment fade-right">AltUnityTester (AltUnityDriver)</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Now it's time for live demo &#x1F92A;</h2>
+					<pre class="Shell Session"><code>$ cd ~/workspace/lqa11-appium</code><code>$ appium | tee appium-$(date +%s).log</code></pre>
+				</section>
+				<section>
+					<h2>Environment setup &#x1F9F0;</h2>
+					<small>( Fedora Rawhide )</small>
+					<pre class="Shell Session"><code>$ sudo dnf install \
+https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm</code></pre>
+					<pre class="Shell Session"><code>$ sudo dnf install java-1.8.0-openjdk java-1.8.0-openjdk-devel gcc-c++ cmake npm ffmpeg \
+python3-virtualenv python3-virtualenvwrapper</code></pre>
+					<pre class="Shell Session"><code>$ echo 'source /usr/bin/virtualenvwrapper-3.sh' >> ~/.bashrc</code></pre>
+					<pre class="Shell Session"><code>$ echo 'export JAVA_HOME=/lib/jvm/java-1.8.0-openjdk' >> ~/.bashrc</code></pre>
+					<pre class="Shell Session"><code>$ echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc</code></pre>
+				</section>
+				<section>
+						<h2>Environment setup &#x1F9F0;</h2>
+						<small>( Fedora Rawhide )</small>
+						<p>Get <i>Command line tools only</i> from <a href="https://developer.android.com/studio/#downloads">https://developer.android.com/studio/#downloads</a></p>
+						<pre class="Shell Session"><code>$ mkdir -p ~/Android/Sdk</code></pre>
+						<pre class="Shell Session"><code>$ unzip ~/Downloads/sdk-tools-linux-4333796.zip -d ~/Android/Sdk/</code></pre>
+						<pre class="Shell Session"><code>$ echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.bashrc</code></pre>
+						<pre class="Shell Session"><code>$ echo 'export PATH=$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH' >> ~/.bashrc</code></pre>
+						<pre class="Shell Session"><code>$ source ~/.bashrc</code></pre>
+						<pre class="Shell Session"><code>$ sdkmanager "platform-tools" "platforms;android-28"</code></pre>
+						<pre class="Shell Session"><code>$ sdkmanager "build-tools;28.0.3"</code></pre>
+				</section>
+				<section>
+						<h2>Environment setup &#x1F9F0;</h2>
+						<small>( Fedora Rawhide )</small>
+						<pre class="Shell Session"><code>$ npm config set prefix '~/.npm-global'</code></pre>
+						<pre class="Shell Session"><code>$ npm install -g npm@latest</code></pre>
+						<pre class="Shell Session"><code>$ npm install -g opencv4nodejs</code></pre>
+						<pre class="Shell Session"><code>$ npm install -g appium</code></pre>
+						<pre class="Shell Session"><code>$ npm install -g appium-doctor</code></pre>
+						<pre class="Shell Session"><code>$ echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc</code></pre>
+						<pre class="Shell Session"><code>$ source ~/.bashrc # after this you can run appium server</code></pre>
+				</section>
+				<section>
+						<h2>Environment setup &#x1F9F0;</h2>
+						<small>( Fedora Rawhide )</small>
+						<pre class="Shell Session"><code>$ # use lsusb to get device ID, USB debugging on device should be enabled</code><code>$ echo \
+'SUBSYSTEM=="usb", ATTR{idVendor}=="????", ATTR{idProduct}=="????", TAG+="uaccess", SYMLINK+="mobi%n"' \
+| sudo tee -a /etc/udev/rules.d/51-android.rules</code></pre>
+						<pre class="Shell Session"><code>$ mkdir -p ~/workspace/lqa11-appium</code></pre>
+						<pre class="Shell Session"><code>$ cd ~/workspace/lqa11-appium</code></pre>
+						<pre class="Shell Session"><code>$ mkvirtualenv appium</code></pre>
+						<pre class="Shell Session"><code>(appium) $ pip install Appium-Python-Client</code></pre>
+				</section>
+				<section>
+						<h2>Tips &#x1F60E</h2>
+						<p>Mobile screen mirroring to PC</p>
+						<pre class="Shell Session"><code>$ adb shell screenrecord --output-format=h264 - | ffplay -framerate 60 -framedrop -bufsize 16M -</code></pre>
+						<p>Find appPackage and appActivity</p>
+						<pre class="Shell Session"><code>$ adb shell dumpsys window windows | grep -E 'mCurrentFocus'</code></pre>
+				</section>
+				<section>
+					<h2>Related links &#x1F4CE;</h2>
+						<p><ul>
+							<li><a href="https://youtu.be/kfPGUShSUy8">TMPA 2017: Unity Application Testing Automation with Appium and Image Recognition</a></li>
+							<li><a href="https://youtu.be/KwmanWMTh10">Using Appium for Unity games and apps - Ru Cindrea | Appium Conf 2018</a></li>
+						</ul></p>
+				</section>
+				<section>
+					<h2>Questions &#x2754;</h2>
+				</section>
+				<section>
+					<h2>Thank you &#x1F600;</h2>
+				</section>
+	
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				history: true,
+				width: 1650,
+				height: 700,
+
+				
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
