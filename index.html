@@ -40,7 +40,6 @@
 					<p class="fragment fade-right">Mechanical Engineer by day, IT enthusiast at night</p>
 					<p class="fragment fade-right">UTP, WSB</p>
 					<p class="fragment fade-right">&#x1F468;&#x200D;&#x1F469;&#x200D;&#x1F467;&#x200D;&#x1F467; &#x1F408;</p>
- 
 				</section>
 				<section>
 					<h2>What is Appium&#x2754; &#x1F916;</h2>
@@ -86,12 +85,28 @@
 					</ul>
 				</section>
 				<section>
+					<h2>Related links &#x1F4CE;</h2>
+						<p><ul>
+							<li><a href="https://youtu.be/kfPGUShSUy8">TMPA 2017: Unity Application Testing Automation with Appium and Image Recognition</a></li>
+							<li><a href="https://youtu.be/KwmanWMTh10">Using Appium for Unity games and apps - Ru Cindrea | Appium Conf 2018</a></li>
+						</ul></p>
+				</section>
+				<section>
 					<h2>Now it's time for live demo &#x1F92A;</h2>
 					<pre class="Shell Session"><code>$ cd ~/workspace/lqa11-appium</code><code>$ appium | tee appium-$(date +%s).log</code></pre>
 				</section>
 				<section>
-					<h2>Environment setup &#x1F9F0;</h2>
-					<small>( Fedora Rawhide )</small>
+					<h2>Simple tips &#x1F60E;</h2>
+					<p>Mobile screen mirroring to PC</p>
+					<pre class="Shell Session"><code>$ adb shell screenrecord --output-format=h264 - | ffplay -framerate 60 -framedrop -bufsize 16M -</code></pre>
+					<p>Finding appPackage and appActivity</p>
+					<pre class="Shell Session"><code>$ adb shell dumpsys window windows | grep -E 'mCurrentFocus'</code></pre>
+					<p>Downloading screenshot to current directory</p>
+					<pre class="Shell Session"><code>$ adb exec-out screencap -p > screen.png</code></pre>
+				</section>
+				<section>
+					<h2>Environment setup &#x1F6E0;</h2>
+					<small>( Fedora Rawhide, step by step )</small>
 					<pre class="Shell Session"><code>$ sudo dnf install \
 https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
 https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm</code></pre>
@@ -102,52 +117,38 @@ python3-virtualenv python3-virtualenvwrapper</code></pre>
 					<pre class="Shell Session"><code>$ echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc</code></pre>
 				</section>
 				<section>
-						<h2>Environment setup &#x1F9F0;</h2>
-						<small>( Fedora Rawhide )</small>
-						<p>Get <i>Command line tools only</i> from <a href="https://developer.android.com/studio/#downloads">https://developer.android.com/studio/#downloads</a></p>
-						<pre class="Shell Session"><code>$ mkdir -p ~/Android/Sdk</code></pre>
-						<pre class="Shell Session"><code>$ unzip ~/Downloads/sdk-tools-linux-4333796.zip -d ~/Android/Sdk/</code></pre>
-						<pre class="Shell Session"><code>$ echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.bashrc</code></pre>
-						<pre class="Shell Session"><code>$ echo 'export PATH=$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH' >> ~/.bashrc</code></pre>
-						<pre class="Shell Session"><code>$ source ~/.bashrc</code></pre>
-						<pre class="Shell Session"><code>$ sdkmanager "platform-tools" "platforms;android-28"</code></pre>
-						<pre class="Shell Session"><code>$ sdkmanager "build-tools;28.0.3"</code></pre>
+					<h2>Environment setup &#x1F6E0;</h2>
+					<small>( Fedora Rawhide, step by step )</small>
+					<p>Get <i>Command line tools only</i> from <a href="https://developer.android.com/studio/#downloads">https://developer.android.com/studio/#downloads</a></p>
+					<pre class="Shell Session"><code>$ mkdir -p ~/Android/Sdk</code></pre>
+					<pre class="Shell Session"><code>$ unzip ~/Downloads/sdk-tools-linux-4333796.zip -d ~/Android/Sdk/</code></pre>
+					<pre class="Shell Session"><code>$ echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.bashrc</code></pre>
+					<pre class="Shell Session"><code>$ echo 'export PATH=$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH' >> ~/.bashrc</code></pre>
+					<pre class="Shell Session"><code>$ source ~/.bashrc</code></pre>
+					<pre class="Shell Session"><code>$ sdkmanager "platform-tools" "platforms;android-28"</code></pre>
+					<pre class="Shell Session"><code>$ sdkmanager "build-tools;28.0.3"</code></pre>
 				</section>
 				<section>
-						<h2>Environment setup &#x1F9F0;</h2>
-						<small>( Fedora Rawhide )</small>
-						<pre class="Shell Session"><code>$ npm config set prefix '~/.npm-global'</code></pre>
-						<pre class="Shell Session"><code>$ npm install -g npm@latest</code></pre>
-						<pre class="Shell Session"><code>$ npm install -g opencv4nodejs</code></pre>
-						<pre class="Shell Session"><code>$ npm install -g appium</code></pre>
-						<pre class="Shell Session"><code>$ npm install -g appium-doctor</code></pre>
-						<pre class="Shell Session"><code>$ echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc</code></pre>
-						<pre class="Shell Session"><code>$ source ~/.bashrc # after this you can run appium server</code></pre>
+					<h2>Environment setup &#x1F6E0;</h2>
+					<small>( Fedora Rawhide, step by step )</small>
+					<pre class="Shell Session"><code>$ npm config set prefix '~/.npm-global'</code></pre>
+					<pre class="Shell Session"><code>$ npm install -g npm@latest</code></pre>
+					<pre class="Shell Session"><code>$ npm install -g opencv4nodejs</code></pre>
+					<pre class="Shell Session"><code>$ npm install -g appium</code></pre>
+					<pre class="Shell Session"><code>$ npm install -g appium-doctor</code></pre>
+					<pre class="Shell Session"><code>$ echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc</code></pre>
+					<pre class="Shell Session"><code>$ source ~/.bashrc # after this you can run appium server</code></pre>
 				</section>
 				<section>
-						<h2>Environment setup &#x1F9F0;</h2>
-						<small>( Fedora Rawhide )</small>
-						<pre class="Shell Session"><code>$ # use lsusb to get device ID, USB debugging on device should be enabled</code><code>$ echo \
+					<h2>Environment setup &#x1F6E0;</h2>
+					<small>( Fedora Rawhide, step by step )</small>
+					<pre class="Shell Session"><code>$ # use lsusb to get device ID, USB debugging on device should be enabled</code><code>$ echo \
 'SUBSYSTEM=="usb", ATTR{idVendor}=="????", ATTR{idProduct}=="????", TAG+="uaccess", SYMLINK+="mobi%n"' \
 | sudo tee -a /etc/udev/rules.d/51-android.rules</code></pre>
-						<pre class="Shell Session"><code>$ mkdir -p ~/workspace/lqa11-appium</code></pre>
-						<pre class="Shell Session"><code>$ cd ~/workspace/lqa11-appium</code></pre>
-						<pre class="Shell Session"><code>$ mkvirtualenv appium</code></pre>
-						<pre class="Shell Session"><code>(appium) $ pip install Appium-Python-Client</code></pre>
-				</section>
-				<section>
-						<h2>Tips &#x1F60E</h2>
-						<p>Mobile screen mirroring to PC</p>
-						<pre class="Shell Session"><code>$ adb shell screenrecord --output-format=h264 - | ffplay -framerate 60 -framedrop -bufsize 16M -</code></pre>
-						<p>Find appPackage and appActivity</p>
-						<pre class="Shell Session"><code>$ adb shell dumpsys window windows | grep -E 'mCurrentFocus'</code></pre>
-				</section>
-				<section>
-					<h2>Related links &#x1F4CE;</h2>
-						<p><ul>
-							<li><a href="https://youtu.be/kfPGUShSUy8">TMPA 2017: Unity Application Testing Automation with Appium and Image Recognition</a></li>
-							<li><a href="https://youtu.be/KwmanWMTh10">Using Appium for Unity games and apps - Ru Cindrea | Appium Conf 2018</a></li>
-						</ul></p>
+					<pre class="Shell Session"><code>$ mkdir -p ~/workspace/lqa11-appium</code></pre>
+					<pre class="Shell Session"><code>$ cd ~/workspace/lqa11-appium</code></pre>
+					<pre class="Shell Session"><code>$ mkvirtualenv appium</code></pre>
+					<pre class="Shell Session"><code>(appium) $ pip install Appium-Python-Client</code></pre>
 				</section>
 				<section>
 					<h2>Questions &#x2754;</h2>
